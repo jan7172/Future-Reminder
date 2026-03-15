@@ -10,9 +10,22 @@
 		3D84D3B12F66D262003DE688 /* FutureReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FutureReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3D84D3CB2F66D49A003DE688 /* Exceptions for "FutureReminder" folder in "FutureReminder" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3D84D3B02F66D262003DE688 /* FutureReminder */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3D84D3B32F66D262003DE688 /* FutureReminder */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3D84D3CB2F66D49A003DE688 /* Exceptions for "FutureReminder" folder in "FutureReminder" target */,
+			);
 			path = FutureReminder;
 			sourceTree = "<group>";
 		};
@@ -256,6 +269,9 @@
 				DEVELOPMENT_TEAM = 8K739A5732;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FutureReminder/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Future Reminder needs your location to trigger reminders when you arrive at a place.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Future Reminder needs your location to trigger reminders when you arrive at a place.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +304,9 @@
 				DEVELOPMENT_TEAM = 8K739A5732;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FutureReminder/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Future Reminder needs your location to trigger reminders when you arrive at a place.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Future Reminder needs your location to trigger reminders when you arrive at a place.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
