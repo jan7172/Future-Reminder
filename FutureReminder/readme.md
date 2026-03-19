@@ -5,7 +5,7 @@
 [![iOS](https://img.shields.io/badge/iOS-17%2B-blue?logo=apple)](https://future-reminder.app)
 [![Swift](https://img.shields.io/badge/Swift-5.9-orange?logo=swift)](https://swift.org)
 [![SwiftUI](https://img.shields.io/badge/SwiftUI-5-blue)](https://developer.apple.com/xcode/swiftui/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![License](https://img.shields.io/badge/License-Proprietary-red)](https://future-reminder.app)
 [![App Store](https://img.shields.io/badge/App%20Store-Coming%20Soon-lightgrey?logo=apple)](https://future-reminder.app)
 
 ---
