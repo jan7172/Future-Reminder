@@ -19,16 +19,15 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                // Aktive Reminder
                 if activeReminders.isEmpty && doneReminders.isEmpty {
                     ContentUnavailableView(
-                        "No Reminders",
+                        String(localized: "no_reminders"),
                         systemImage: "mappin.slash",
-                        description: Text("Add a reminder and set a location as trigger.")
+                        description: Text(String(localized: "no_reminders_description"))
                     )
                 } else {
                     if !activeReminders.isEmpty {
-                        Section("Active") {
+                        Section(String(localized: "active")) {
                             ForEach(activeReminders) { reminder in
                                 NavigationLink(destination: ReminderDetailView(reminder: reminder)) {
                                     ReminderRow(reminder: reminder)
@@ -37,10 +36,8 @@ struct ContentView: View {
                             .onDelete(perform: deleteActive)
                         }
                     }
-
-                    // Erledigte Reminder
                     if !doneReminders.isEmpty {
-                        Section("Done") {
+                        Section(String(localized: "done")) {
                             ForEach(doneReminders) { reminder in
                                 NavigationLink(destination: ReminderDetailView(reminder: reminder)) {
                                     ReminderRow(reminder: reminder, isDone: true)
@@ -51,7 +48,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Future Reminder")
+            .navigationTitle(String(localized: "future_reminder"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -61,9 +58,7 @@ struct ContentView: View {
                     }
                     .simultaneousGesture(
                         LongPressGesture(minimumDuration: 1.5)
-                            .onEnded { _ in
-                                showDebug = true
-                            }
+                            .onEnded { _ in showDebug = true }
                     )
                 }
             }

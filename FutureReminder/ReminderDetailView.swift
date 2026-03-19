@@ -38,26 +38,20 @@ struct ReminderDetailView: View {
                 detailView
             }
         }
-        .navigationTitle(isEditing ? "Edit Reminder" : reminder.title)
+        .navigationTitle(isEditing ? String(localized: "edit_reminder") : reminder.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 if isEditing {
-                    Button("Save") {
-                        saveEdits()
-                    }
-                    .fontWeight(.semibold)
+                    Button(String(localized: "save")) { saveEdits() }
+                        .fontWeight(.semibold)
                 } else {
-                    Button("Edit") {
-                        startEditing()
-                    }
+                    Button(String(localized: "edit")) { startEditing() }
                 }
             }
             if isEditing {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") {
-                        isEditing = false
-                    }
+                    Button(String(localized: "cancel")) { isEditing = false }
                 }
             }
         }
@@ -67,15 +61,20 @@ struct ReminderDetailView: View {
 
     @ViewBuilder
     var detailView: some View {
-        Section("Reminder") {
-            LabeledContent("Title", value: reminder.title)
+        Section(String(localized: "reminder_section")) {
+            LabeledContent(String(localized: "title_field"), value: reminder.title)
             if !reminder.note.isEmpty {
-                LabeledContent("Note", value: reminder.note)
+                LabeledContent(String(localized: "note_optional"), value: reminder.note)
             }
-            LabeledContent("Status", value: reminder.isDone ? "Done ✓" : "Open")
+            LabeledContent(
+                String(localized: "status"),
+                value: reminder.isDone
+                    ? String(localized: "status_done")
+                    : String(localized: "status_open")
+            )
         }
 
-        Section("Location Trigger") {
+        Section(String(localized: "location_trigger")) {
             if !reminder.locationName.isEmpty {
                 Label(reminder.locationName, systemImage: "mappin.circle")
             }
@@ -83,7 +82,7 @@ struct ReminderDetailView: View {
 
             Map {
                 Marker(
-                    reminder.locationName.isEmpty ? "Trigger" : reminder.locationName,
+                    reminder.locationName.isEmpty ? String(localized: "trigger") : reminder.locationName,
                     coordinate: coordinate
                 )
                 MapCircle(center: coordinate, radius: reminder.radius)
@@ -102,18 +101,17 @@ struct ReminderDetailView: View {
                     LocationManager.shared.cancelNotification(for: reminder)
                     dismiss()
                 } label: {
-                    Label("Mark as Done", systemImage: "checkmark.circle")
+                    Label(String(localized: "mark_as_done"), systemImage: "checkmark.circle")
                         .foregroundStyle(.green)
                 }
             }
-
             Button(role: .destructive) {
                 LocationManager.shared.cancelNotification(for: reminder)
                 let r = reminder
                 modelContext.delete(r)
                 dismiss()
             } label: {
-                Label("Delete Reminder", systemImage: "trash")
+                Label(String(localized: "delete_reminder"), systemImage: "trash")
             }
         }
         .onAppear {
@@ -129,16 +127,16 @@ struct ReminderDetailView: View {
 
     @ViewBuilder
     var editView: some View {
-        Section("Reminder") {
-            TextField("Title", text: $editTitle)
-            TextField("Note (optional)", text: $editNote)
+        Section(String(localized: "reminder_section")) {
+            TextField(String(localized: "title_field"), text: $editTitle)
+            TextField(String(localized: "note_optional"), text: $editNote)
         }
 
-        Section("Location Trigger") {
+        Section(String(localized: "location_trigger")) {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(.secondary)
-                TextField("Search address or place...", text: $searchText)
+                TextField(String(localized: "search_placeholder"), text: $searchText)
                     .autocorrectionDisabled()
                     .onSubmit { searchLocation() }
                 if !searchText.isEmpty {
@@ -153,24 +151,21 @@ struct ReminderDetailView: View {
             }
 
             if isSearching {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                    Spacer()
-                }
+                HStack { Spacer(); ProgressView(); Spacer() }
             }
 
             if !searchResults.isEmpty {
-                ForEach(searchResults, id: \.self) { item in
-                    Button {
-                        selectLocation(item)
-                    } label: {
+                ForEach(0..<searchResults.count, id: \.self) { index in
+                    let item = searchResults[index]
+                    Button { selectLocation(item) } label: {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(item.name ?? "Unknown")
+                            Text(item.name ?? String(localized: "unknown"))
                                 .foregroundStyle(.primary)
-                            Text(item.placemark.thoroughfare ?? item.placemark.locality ?? "")
-                                .foregroundStyle(.secondary)
-                                .font(.caption)
+                            if let title = item.name {
+                                Text(title)
+                                    .foregroundStyle(.secondary)
+                                    .font(.caption)
+                            }
                         }
                     }
                 }
@@ -179,7 +174,7 @@ struct ReminderDetailView: View {
             if let coord = editCoordinate {
                 Map(position: $mapPosition) {
                     Marker(
-                        editLocationName.isEmpty ? "Trigger" : editLocationName,
+                        editLocationName.isEmpty ? String(localized: "trigger") : editLocationName,
                         coordinate: coord
                     )
                     MapCircle(center: coord, radius: editRadius)
@@ -204,11 +199,9 @@ struct ReminderDetailView: View {
         guard !searchText.isEmpty else { return }
         isSearching = true
         searchResults = []
-
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchText
         request.resultTypes = [.address, .pointOfInterest]
-
         let search = MKLocalSearch(request: request)
         search.start { response, _ in
             isSearching = false
@@ -219,12 +212,11 @@ struct ReminderDetailView: View {
     }
 
     private func selectLocation(_ item: MKMapItem) {
-        let coord = item.placemark.coordinate
+        let coord = item.location.coordinate
         editCoordinate = coord
         editLocationName = item.name ?? ""
         searchText = editLocationName
         searchResults = []
-
         withAnimation {
             mapPosition = .region(MKCoordinateRegion(
                 center: coord,
@@ -234,7 +226,7 @@ struct ReminderDetailView: View {
         }
     }
 
-    // MARK: - Save Edits
+    // MARK: - Save
 
     private func startEditing() {
         editTitle = reminder.title
@@ -253,17 +245,14 @@ struct ReminderDetailView: View {
 
     private func saveEdits() {
         LocationManager.shared.cancelNotification(for: reminder)
-
         reminder.title = editTitle
         reminder.note = editNote
         reminder.locationName = editLocationName
         reminder.radius = editRadius
-
         if let coord = editCoordinate {
             reminder.latitude = coord.latitude
             reminder.longitude = coord.longitude
         }
-
         LocationManager.shared.scheduleNotification(for: reminder)
         isEditing = false
     }

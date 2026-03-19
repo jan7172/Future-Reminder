@@ -38,7 +38,6 @@ class LocationManager: NSObject {
             print("Geofencing not available")
             return
         }
-
         let region = CLCircularRegion(
             center: CLLocationCoordinate2D(latitude: reminder.latitude, longitude: reminder.longitude),
             radius: max(reminder.radius, 100),
@@ -63,7 +62,6 @@ class LocationManager: NSObject {
         }
     }
 
-    // Alle Geofences neu registrieren – gegen iOS 30-Tage-Limit
     func refreshAllGeofences(reminders: [Reminder]) {
         stopAllMonitoring()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -79,8 +77,8 @@ class LocationManager: NSObject {
         let content = UNMutableNotificationContent()
         content.title = reminder.title
         content.body = reminder.locationName.isEmpty
-            ? "You've arrived at your reminder location."
-            : "You've arrived at \(reminder.locationName)."
+            ? String(localized: "arrived_at_location")
+            : String(format: String(localized: "arrived_at_place"), reminder.locationName)
         content.sound = .default
         content.userInfo = ["reminderID": reminder.id.uuidString]
 
@@ -93,7 +91,11 @@ class LocationManager: NSObject {
         region.notifyOnExit = false
 
         let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
-        let request = UNNotificationRequest(identifier: reminder.id.uuidString, content: content, trigger: trigger)
+        let request = UNNotificationRequest(
+            identifier: reminder.id.uuidString,
+            content: content,
+            trigger: trigger
+        )
 
         UNUserNotificationCenter.current().add(request) { error in
             if let error {

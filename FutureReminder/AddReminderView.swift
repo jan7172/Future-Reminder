@@ -30,20 +30,18 @@ struct AddReminderView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Reminder") {
-                    TextField("Title", text: $title)
-                    TextField("Note (optional)", text: $note)
+                Section(String(localized: "reminder_section")) {
+                    TextField(String(localized: "title_field"), text: $title)
+                    TextField(String(localized: "note_optional"), text: $note)
                 }
 
-                Section("Location Trigger") {
+                Section(String(localized: "location_trigger")) {
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundStyle(.secondary)
-                        TextField("Search address or place...", text: $searchText)
+                        TextField(String(localized: "search_placeholder"), text: $searchText)
                             .autocorrectionDisabled()
-                            .onSubmit {
-                                searchLocation()
-                            }
+                            .onSubmit { searchLocation() }
                         if !searchText.isEmpty {
                             Button {
                                 searchText = ""
@@ -56,24 +54,18 @@ struct AddReminderView: View {
                     }
 
                     if isSearching {
-                        HStack {
-                            Spacer()
-                            ProgressView()
-                            Spacer()
-                        }
+                        HStack { Spacer(); ProgressView(); Spacer() }
                     }
 
                     if !searchResults.isEmpty {
-                        ForEach(searchResults, id: \.self) { item in
-                            Button {
-                                selectLocation(item)
-                            } label: {
+                        ForEach(0..<searchResults.count, id: \.self) { index in
+                            let item = searchResults[index]
+                            Button { selectLocation(item) } label: {
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text(item.name ?? "Unknown")
+                                    Text(item.name ?? String(localized: "unknown"))
                                         .foregroundStyle(.primary)
-                                        .font(.body)
-                                    if let address = item.placemark.title {
-                                        Text(address)
+                                    if let subtitle = item.placemark.title, !subtitle.isEmpty {
+                                        Text(subtitle)
                                             .foregroundStyle(.secondary)
                                             .font(.caption)
                                     }
@@ -84,8 +76,10 @@ struct AddReminderView: View {
 
                     if let coord = selectedCoordinate {
                         Map(position: $mapPosition) {
-                            Marker(locationName.isEmpty ? "Trigger" : locationName,
-                                   coordinate: coord)
+                            Marker(
+                                locationName.isEmpty ? String(localized: "trigger") : locationName,
+                                coordinate: coord
+                            )
                             MapCircle(center: coord, radius: radius)
                                 .foregroundStyle(.blue.opacity(0.15))
                                 .stroke(.blue, lineWidth: 1)
@@ -95,7 +89,7 @@ struct AddReminderView: View {
                         .disabled(true)
 
                         HStack {
-                            Text("Radius: \(Int(radius)) m")
+                            Text(String(format: String(localized: "radius_label"), Int(radius)))
                             Slider(value: $radius, in: 50...500, step: 50)
                         }
                     } else {
@@ -107,7 +101,7 @@ struct AddReminderView: View {
                                     Image(systemName: "mappin.and.ellipse")
                                         .font(.title2)
                                         .foregroundStyle(.blue)
-                                    Text("Search for a location above")
+                                    Text(String(localized: "search_location_hint"))
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                 }
@@ -117,36 +111,30 @@ struct AddReminderView: View {
                     }
                 }
             }
-            .navigationTitle("New Reminder")
+            .navigationTitle(String(localized: "new_reminder"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") { dismiss() }
+                    Button(String(localized: "cancel")) { dismiss() }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Save") {
-                        save()
-                    }
-                    .disabled(!canSave)
-                    .fontWeight(.semibold)
+                    Button(String(localized: "save")) { save() }
+                        .disabled(!canSave)
+                        .fontWeight(.semibold)
                 }
             }
         }
     }
 
-    // MARK: - Search
-
     private func searchLocation() {
         guard !searchText.isEmpty else { return }
         isSearching = true
         searchResults = []
-
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchText
         request.resultTypes = [.address, .pointOfInterest]
-
         let search = MKLocalSearch(request: request)
-        search.start { response, error in
+        search.start { response, _ in
             isSearching = false
             if let items = response?.mapItems {
                 searchResults = Array(items.prefix(5))
@@ -155,12 +143,11 @@ struct AddReminderView: View {
     }
 
     private func selectLocation(_ item: MKMapItem) {
-        let coord = item.placemark.coordinate
+        let coord = item.location.coordinate
         selectedCoordinate = coord
-        locationName = item.name ?? item.placemark.title ?? ""
+        locationName = item.name ?? ""
         searchText = locationName
         searchResults = []
-
         withAnimation {
             mapPosition = .region(MKCoordinateRegion(
                 center: coord,
@@ -169,8 +156,6 @@ struct AddReminderView: View {
             ))
         }
     }
-
-    // MARK: - Save
 
     private func save() {
         guard let coord = selectedCoordinate else { return }
@@ -187,3 +172,4 @@ struct AddReminderView: View {
         dismiss()
     }
 }
+

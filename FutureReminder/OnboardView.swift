@@ -7,7 +7,6 @@ struct OnboardingView: View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Icon
             ZStack {
                 RoundedRectangle(cornerRadius: 28)
                     .fill(.blue.gradient)
@@ -18,48 +17,45 @@ struct OnboardingView: View {
             }
             .padding(.bottom, 32)
 
-            // Title
-            Text("Future Reminder")
+            Text(String(localized: "future_reminder"))
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.bottom, 8)
 
-            Text("Reminders that trigger when\nyou arrive – not just at a fixed time.")
+            Text(String(localized: "onboarding_subtitle"))
                 .font(.title3)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 48)
 
-            // Features
             VStack(spacing: 24) {
                 OnboardingFeatureRow(
                     icon: "mappin.and.ellipse",
                     color: .blue,
-                    title: "Location Triggers",
-                    description: "Set any place as a trigger for your reminder."
+                    title: String(localized: "onboarding_feature_location_title"),
+                    description: String(localized: "onboarding_feature_location_description")
                 )
                 OnboardingFeatureRow(
                     icon: "bell.fill",
                     color: .orange,
-                    title: "Automatic Notifications",
-                    description: "Get notified the moment you arrive."
+                    title: String(localized: "onboarding_feature_notification_title"),
+                    description: String(localized: "onboarding_feature_notification_description")
                 )
                 OnboardingFeatureRow(
                     icon: "lock.fill",
                     color: .green,
-                    title: "100% Private",
-                    description: "All data stays on your device. No cloud, no tracking."
+                    title: String(localized: "onboarding_feature_privacy_title"),
+                    description: String(localized: "onboarding_feature_privacy_description")
                 )
             }
             .padding(.horizontal, 32)
 
             Spacer()
 
-            // Button
             Button {
                 hasSeenOnboarding = true
             } label: {
-                Text("Get Started")
+                Text(String(localized: "get_started"))
                     .font(.headline)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
@@ -89,11 +85,8 @@ struct OnboardingFeatureRow: View {
                     .foregroundStyle(color)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.headline)
-                Text(description)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                Text(title).font(.headline)
+                Text(description).font(.subheadline).foregroundStyle(.secondary)
             }
             Spacer()
         }
