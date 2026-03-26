@@ -608,4 +608,3 @@ struct AddReminderView: View {
         dismiss()
     }
 }
-

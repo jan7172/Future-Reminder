@@ -15,50 +15,46 @@ struct DebugView: View {
     var body: some View {
         NavigationStack {
             List {
-                // MARK: - Status
-                Section("System Status") {
-                    LabeledContent("Notifications", value: notificationStatus)
-                    LabeledContent("Location", value: locationStatus)
-                    LabeledContent("Monitored Regions", value: "\(monitoredRegionCount())")
-                    LabeledContent("Active Reminders", value: "\(reminders.count)")
+                Section(String(localized: "System Status")) {
+                    LabeledContent(String(localized: "Notifications"), value: notificationStatus)
+                    LabeledContent(String(localized: "Location"), value: locationStatus)
+                    LabeledContent(String(localized: "Monitored Regions"), value: "\(monitoredRegionCount())")
+                    LabeledContent(String(localized: "Active Reminders"), value: "\(reminders.count)")
                 }
 
-                // MARK: - Actions
-                Section("Trigger Tests") {
+                Section(String(localized: "Trigger Tests")) {
                     Button {
                         fireTestNotification()
                     } label: {
-                        Label("Fire Test Notification (5s)", systemImage: "bell.fill")
+                        Label(String(localized: "Fire Test Notification (5s)"), systemImage: "bell.fill")
                     }
 
                     ForEach(reminders) { reminder in
                         Button {
                             fireNotificationFor(reminder)
                         } label: {
-                            Label("Trigger: \(reminder.title)", systemImage: "mappin.circle")
+                            Label(String(format: String(localized: "Trigger: %@"), reminder.title), systemImage: "mappin.circle")
                         }
                     }
                 }
 
-                // MARK: - Geofence
-                Section("Geofence Actions") {
+                Section(String(localized: "Geofence Actions")) {
                     Button {
                         reregisterAll()
                     } label: {
-                        Label("Re-register all Geofences", systemImage: "arrow.clockwise")
+                        Label(String(localized: "Re-register all Geofences"), systemImage: "arrow.clockwise")
                     }
 
                     Button(role: .destructive) {
                         LocationManager.shared.stopAllMonitoring()
-                        addLog("Stopped all monitoring")
+                        addLog("✅ \(String(localized: "Stop all Monitoring"))")
                     } label: {
-                        Label("Stop all Monitoring", systemImage: "stop.circle")
+                        Label(String(localized: "Stop all Monitoring"), systemImage: "stop.circle")
                     }
                 }
 
-                // MARK: - Log
                 if !log.isEmpty {
-                    Section("Log") {
+                    Section(String(localized: "Log")) {
                         ForEach(log, id: \.self) { entry in
                             Text(entry)
                                 .font(.caption)
@@ -67,11 +63,11 @@ struct DebugView: View {
                     }
                 }
             }
-            .navigationTitle("🛠 Debug Menu")
+            .navigationTitle(String(localized: "🛠 Debug Menu"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Close") { dismiss() }
+                    Button(String(localized: "Close")) { dismiss() }
                 }
             }
             .onAppear {
@@ -84,8 +80,8 @@ struct DebugView: View {
 
     private func fireTestNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Future Reminder – Test"
-        content.body = "This is a test notification. Everything works! ✅"
+        content.title = String(localized: "future_reminder")
+        content.body = String(localized: "debug_test_notification_body")
         content.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
@@ -94,9 +90,9 @@ struct DebugView: View {
         UNUserNotificationCenter.current().add(request) { error in
             DispatchQueue.main.async {
                 if let error {
-                    addLog("❌ Notification error: \(error.localizedDescription)")
+                    addLog("❌ \(error.localizedDescription)")
                 } else {
-                    addLog("✅ Test notification scheduled – fires in 5s")
+                    addLog("✅ \(String(localized: "debug_log_test_scheduled"))")
                 }
             }
         }
@@ -106,8 +102,8 @@ struct DebugView: View {
         let content = UNMutableNotificationContent()
         content.title = reminder.title
         content.body = reminder.locationName.isEmpty
-            ? "You've arrived at your reminder location."
-            : "You've arrived at \(reminder.locationName)."
+            ? String(localized: "arrived_at_location")
+            : String(format: String(localized: "arrived_at_place"), reminder.locationName)
         content.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
@@ -116,9 +112,9 @@ struct DebugView: View {
         UNUserNotificationCenter.current().add(request) { error in
             DispatchQueue.main.async {
                 if let error {
-                    addLog("❌ Error: \(error.localizedDescription)")
+                    addLog("❌ \(error.localizedDescription)")
                 } else {
-                    addLog("✅ Triggered: \(reminder.title) – fires in 3s")
+                    addLog("✅ \(String(format: String(localized: "debug_log_triggered"), reminder.title))")
                 }
             }
         }
@@ -129,7 +125,7 @@ struct DebugView: View {
         for reminder in reminders {
             LocationManager.shared.scheduleNotification(for: reminder)
         }
-        addLog("✅ Re-registered \(reminders.count) geofence(s)")
+        addLog("✅ \(String(format: String(localized: "debug_log_reregistered"), reminders.count))")
     }
 
     private func monitoredRegionCount() -> Int {
@@ -140,21 +136,21 @@ struct DebugView: View {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
                 switch settings.authorizationStatus {
-                case .authorized: notificationStatus = "✅ Authorized"
-                case .denied: notificationStatus = "❌ Denied"
-                case .notDetermined: notificationStatus = "⚠️ Not determined"
-                default: notificationStatus = "Unknown"
+                case .authorized: notificationStatus = "✅ \(String(localized: "debug_status_authorized"))"
+                case .denied: notificationStatus = "❌ \(String(localized: "debug_status_denied"))"
+                case .notDetermined: notificationStatus = "⚠️ \(String(localized: "debug_status_not_determined"))"
+                default: notificationStatus = String(localized: "unknown")
                 }
             }
         }
 
         let status = CLLocationManager().authorizationStatus
         switch status {
-        case .authorizedAlways: locationStatus = "✅ Always"
-        case .authorizedWhenInUse: locationStatus = "⚠️ When In Use"
-        case .denied: locationStatus = "❌ Denied"
-        case .notDetermined: locationStatus = "⚠️ Not determined"
-        default: locationStatus = "Unknown"
+        case .authorizedAlways: locationStatus = "✅ \(String(localized: "debug_location_always"))"
+        case .authorizedWhenInUse: locationStatus = "⚠️ \(String(localized: "debug_location_when_in_use"))"
+        case .denied: locationStatus = "❌ \(String(localized: "debug_status_denied"))"
+        case .notDetermined: locationStatus = "⚠️ \(String(localized: "debug_status_not_determined"))"
+        default: locationStatus = String(localized: "unknown")
         }
     }
 
