@@ -35,6 +35,7 @@ struct AddReminderView: View {
     @State private var mode: ReminderMode = .single
     @State private var title = ""
     @State private var note = ""
+    @State private var triggerEvent: TriggerEvent = .onArrival
 
     // Single mode
     @State private var locationName = ""
@@ -44,7 +45,7 @@ struct AddReminderView: View {
 
     // Category mode
     @State private var categoryQuery = ""
-    @State private var categoryDisplayQuery = "" // shown to user
+    @State private var categoryDisplayQuery = ""
     @State private var searchCenterName = ""
     @State private var searchCenterCoordinate: CLLocationCoordinate2D?
     @State private var searchRadiusKm: Double = 10
@@ -80,7 +81,6 @@ struct AddReminderView: View {
         Locale.current.language.languageCode?.identifier == "de"
     }
 
-    // Display label + search query (Apple Maps works best with English queries)
     var staticSuggestions: [(display: String, query: String)] {
         isGerman
             ? [("Supermarkt", "Supermarket"), ("Apotheke", "Pharmacy"),
@@ -92,11 +92,13 @@ struct AddReminderView: View {
     var body: some View {
         NavigationStack {
             Form {
+                // MARK: Reminder info
                 Section(String(localized: "reminder_section")) {
                     TextField(String(localized: "title_field"), text: $title)
                     TextField(String(localized: "note_optional"), text: $note)
                 }
 
+                // MARK: Mode picker (Single / Category)
                 Section {
                     Picker("Mode", selection: $mode) {
                         Label("Single Location", systemImage: "mappin.circle.fill")
@@ -112,6 +114,39 @@ struct AddReminderView: View {
                     Text("Trigger Type")
                 }
 
+                // MARK: Trigger event picker (Arrival / Departure / Both)
+                Section {
+                    Picker(
+                        isGerman ? "Wann erinnern" : "When to Remind",
+                        selection: $triggerEvent
+                    ) {
+                        Label(
+                            isGerman ? "Bei Ankunft" : "On Arrival",
+                            systemImage: "arrow.down.circle.fill"
+                        ).tag(TriggerEvent.onArrival)
+
+                        Label(
+                            isGerman ? "Beim Verlassen" : "On Departure",
+                            systemImage: "arrow.up.circle.fill"
+                        ).tag(TriggerEvent.onDeparture)
+
+                        Label(
+                            isGerman ? "Beides" : "Both",
+                            systemImage: "arrow.up.arrow.down.circle.fill"
+                        ).tag(TriggerEvent.both)
+                    }
+                    .pickerStyle(.segmented)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(.init())
+                    .padding(.vertical, 4)
+                } header: {
+                    Text(isGerman ? "Zeitpunkt" : "When")
+                } footer: {
+                    Text(triggerEventFooter)
+                        .font(.caption)
+                }
+
+                // MARK: Location section
                 if mode == .single {
                     singleLocationSection
                 } else {
@@ -143,12 +178,30 @@ struct AddReminderView: View {
         }
     }
 
+    // MARK: - Footer helper
+
+    private var triggerEventFooter: String {
+        switch triggerEvent {
+        case .onArrival:
+            return isGerman
+                ? "Du wirst benachrichtigt, wenn du den Ort betrittst."
+                : "You'll be notified when you arrive at the location."
+        case .onDeparture:
+            return isGerman
+                ? "Du wirst benachrichtigt, wenn du den Ort verlässt."
+                : "You'll be notified when you leave the location."
+        case .both:
+            return isGerman
+                ? "Du wirst beim Ankommen und beim Verlassen benachrichtigt."
+                : "You'll be notified both when arriving and leaving."
+        }
+    }
+
     // MARK: - Single Location Section
 
     var singleLocationSection: some View {
         Section(String(localized: "location_trigger")) {
 
-            // My Location button
             Button {
                 useCurrentLocation()
             } label: {
@@ -216,7 +269,7 @@ struct AddReminderView: View {
                     )
                     .autocorrectionDisabled()
                     .onChange(of: categoryDisplayQuery) { _, new in
-                        categoryQuery = new // sync display → query
+                        categoryQuery = new
                         hasSearched = false
                         foundLocations = []
                         if new.isEmpty {
@@ -241,13 +294,12 @@ struct AddReminderView: View {
                     }
                 }
 
-                // Static suggestion chips
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         ForEach(staticSuggestions, id: \.display) { s in
                             Button {
-                                categoryDisplayQuery = s.display  // show DE label
-                                categoryQuery = s.query            // use EN for search
+                                categoryDisplayQuery = s.display
+                                categoryQuery = s.query
                                 showCategoryCompletions = false
                                 completerDelegate.results = []
                             } label: {
@@ -267,7 +319,6 @@ struct AddReminderView: View {
                 }
                 .listRowInsets(.init(top: 4, leading: 16, bottom: 4, trailing: 16))
 
-                // Dynamic completions
                 if showCategoryCompletions && !completerDelegate.results.isEmpty {
                     ForEach(completerDelegate.results.prefix(5), id: \.self) { completion in
                         Button {
@@ -295,9 +346,7 @@ struct AddReminderView: View {
                     .font(.caption)
             }
 
-            // ── Search Center ──
             Section {
-                // My Location button for search center
                 Button {
                     useCurrentLocationAsCenter()
                 } label: {
@@ -388,7 +437,6 @@ struct AddReminderView: View {
                     .font(.caption)
             }
 
-            // ── Found Locations List ──
             if hasSearched {
                 Section {
                     if foundLocations.isEmpty {
@@ -479,7 +527,6 @@ struct AddReminderView: View {
             isLoadingLocation = false
             return
         }
-        // Reverse geocode to get a name
         let geocoder = CLGeocoder()
         let loc = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
         geocoder.reverseGeocodeLocation(loc) { placemarks, _ in
@@ -588,7 +635,8 @@ struct AddReminderView: View {
             let reminder = Reminder(
                 title: title, note: note,
                 latitude: coord.latitude, longitude: coord.longitude,
-                radius: radius, locationName: locationName
+                radius: radius, locationName: locationName,
+                triggerEvent: triggerEvent
             )
             modelContext.insert(reminder)
             LocationManager.shared.scheduleNotification(for: reminder)
@@ -600,7 +648,8 @@ struct AddReminderView: View {
                 categoryQuery: categoryQuery,
                 searchCenterLat: center.latitude,
                 searchCenterLon: center.longitude,
-                searchRadiusKm: searchRadiusKm
+                searchRadiusKm: searchRadiusKm,
+                triggerEvent: triggerEvent
             )
             modelContext.insert(reminder)
             LocationManager.shared.scheduleNotification(for: reminder)

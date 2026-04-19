@@ -39,8 +39,8 @@ class LocationManager: NSObject {
             radius: max(reminder.radius, 100),
             identifier: reminder.id.uuidString
         )
-        region.notifyOnEntry = true
-        region.notifyOnExit = false
+        region.notifyOnEntry = reminder.triggerEvent != .onDeparture
+        region.notifyOnExit  = reminder.triggerEvent != .onArrival
         manager.startMonitoring(for: region)
     }
 
@@ -79,19 +79,38 @@ class LocationManager: NSObject {
     // MARK: - Single location
 
     private func scheduleSingleGeofence(for reminder: Reminder) {
-        let content = makeNotificationContent(for: reminder, locationName: reminder.locationName)
-        let region = CLCircularRegion(
-            center: CLLocationCoordinate2D(latitude: reminder.latitude, longitude: reminder.longitude),
-            radius: max(reminder.radius, 100),
-            identifier: reminder.id.uuidString
-        )
-        region.notifyOnEntry = true
-        region.notifyOnExit = false
-
-        let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
-        let request = UNNotificationRequest(identifier: reminder.id.uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error { print("Notification error: \(error)") }
+        switch reminder.triggerEvent {
+        case .onArrival:
+            scheduleRegion(
+                for: reminder,
+                locationName: reminder.locationName,
+                identifier: reminder.id.uuidString,
+                isExit: false,
+                repeats: false
+            )
+        case .onDeparture:
+            scheduleRegion(
+                for: reminder,
+                locationName: reminder.locationName,
+                identifier: reminder.id.uuidString,
+                isExit: true,
+                repeats: false
+            )
+        case .both:
+            scheduleRegion(
+                for: reminder,
+                locationName: reminder.locationName,
+                identifier: "\(reminder.id.uuidString)_entry",
+                isExit: false,
+                repeats: false
+            )
+            scheduleRegion(
+                for: reminder,
+                locationName: reminder.locationName,
+                identifier: "\(reminder.id.uuidString)_exit",
+                isExit: true,
+                repeats: false
+            )
         }
     }
 
@@ -120,7 +139,6 @@ class LocationManager: NSObject {
                 return
             }
 
-            // Sort by distance from center, take max 20
             let sorted = items
                 .sorted {
                     let a = CLLocation(latitude: $0.location.coordinate.latitude, longitude: $0.location.coordinate.longitude)
@@ -134,23 +152,43 @@ class LocationManager: NSObject {
                 for (index, item) in sorted.enumerated() {
                     let coord = item.location.coordinate
                     let placeName = item.name ?? reminder.categoryQuery
-                    let identifier = "\(reminder.id.uuidString)_\(index)"
 
-                    let content = self.makeNotificationContent(for: reminder, locationName: placeName)
-
-                    let region = CLCircularRegion(
-                        center: coord,
-                        radius: max(reminder.radius, 100),
-                        identifier: identifier
-                    )
-                    region.notifyOnEntry = true
-                    region.notifyOnExit = false
-
-                    let trigger = UNLocationNotificationTrigger(region: region, repeats: true)
-                    let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-
-                    UNUserNotificationCenter.current().add(request) { error in
-                        if let error { print("Category geofence error: \(error)") }
+                    switch reminder.triggerEvent {
+                    case .onArrival:
+                        self.scheduleRegion(
+                            for: reminder,
+                            coord: coord,
+                            locationName: placeName,
+                            identifier: "\(reminder.id.uuidString)_\(index)",
+                            isExit: false,
+                            repeats: true
+                        )
+                    case .onDeparture:
+                        self.scheduleRegion(
+                            for: reminder,
+                            coord: coord,
+                            locationName: placeName,
+                            identifier: "\(reminder.id.uuidString)_\(index)",
+                            isExit: true,
+                            repeats: true
+                        )
+                    case .both:
+                        self.scheduleRegion(
+                            for: reminder,
+                            coord: coord,
+                            locationName: placeName,
+                            identifier: "\(reminder.id.uuidString)_\(index)_entry",
+                            isExit: false,
+                            repeats: true
+                        )
+                        self.scheduleRegion(
+                            for: reminder,
+                            coord: coord,
+                            locationName: placeName,
+                            identifier: "\(reminder.id.uuidString)_\(index)_exit",
+                            isExit: true,
+                            repeats: true
+                        )
                     }
                 }
                 print("Registered \(sorted.count) geofence(s) for category: \(reminder.categoryQuery)")
@@ -158,8 +196,38 @@ class LocationManager: NSObject {
         }
     }
 
+    // MARK: - Region scheduling helper
+
+    /// Schedules a single UNLocationNotificationRequest for either entry or exit.
+    private func scheduleRegion(
+        for reminder: Reminder,
+        coord: CLLocationCoordinate2D? = nil,
+        locationName: String,
+        identifier: String,
+        isExit: Bool,
+        repeats: Bool
+    ) {
+        let center = coord ?? CLLocationCoordinate2D(
+            latitude: reminder.latitude,
+            longitude: reminder.longitude
+        )
+        let content = makeNotificationContent(for: reminder, locationName: locationName, isExit: isExit)
+        let region = CLCircularRegion(
+            center: center,
+            radius: max(reminder.radius, 100),
+            identifier: identifier
+        )
+        region.notifyOnEntry = !isExit
+        region.notifyOnExit  = isExit
+
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error { print("Notification error [\(identifier)]: \(error)") }
+        }
+    }
+
     func cancelNotification(for reminder: Reminder) {
-        // Remove all identifiers that start with this reminder's UUID
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             let ids = requests
                 .map { $0.identifier }
@@ -169,14 +237,24 @@ class LocationManager: NSObject {
         stopMonitoring(reminder: reminder)
     }
 
-    // MARK: - Helper
+    // MARK: - Notification content
 
-    private func makeNotificationContent(for reminder: Reminder, locationName: String) -> UNMutableNotificationContent {
+    private func makeNotificationContent(
+        for reminder: Reminder,
+        locationName: String,
+        isExit: Bool
+    ) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = reminder.title
-        content.body = locationName.isEmpty
-            ? String(localized: "arrived_at_location")
-            : String(format: String(localized: "arrived_at_place"), locationName)
+        if isExit {
+            content.body = locationName.isEmpty
+                ? String(localized: "left_location")
+                : String(format: String(localized: "left_place"), locationName)
+        } else {
+            content.body = locationName.isEmpty
+                ? String(localized: "arrived_at_location")
+                : String(format: String(localized: "arrived_at_place"), locationName)
+        }
         content.sound = .default
         content.userInfo = ["reminderID": reminder.id.uuidString]
         return content
@@ -193,6 +271,10 @@ extension LocationManager: CLLocationManagerDelegate {
 
     nonisolated func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("Entered region: \(region.identifier)")
+    }
+
+    nonisolated func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        print("Exited region: \(region.identifier)")
     }
 
     nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

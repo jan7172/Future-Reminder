@@ -1,6 +1,16 @@
 import Foundation
 import SwiftData
 
+// MARK: - TriggerEvent
+
+enum TriggerEvent: String, Codable, CaseIterable {
+    case onArrival
+    case onDeparture
+    case both
+}
+
+// MARK: - Reminder
+
 @Model
 class Reminder {
     @Attribute(.unique) var id: UUID
@@ -20,6 +30,14 @@ class Reminder {
     var searchCenterLon: Double
     var searchRadiusKm: Double
 
+    // Trigger event (default: onArrival – backwards compatible with existing records)
+    var triggerEventRaw: String
+
+    var triggerEvent: TriggerEvent {
+        get { TriggerEvent(rawValue: triggerEventRaw) ?? .onArrival }
+        set { triggerEventRaw = newValue.rawValue }
+    }
+
     var isDone: Bool
     var createdAt: Date
 
@@ -34,7 +52,8 @@ class Reminder {
         categoryQuery: String = "",
         searchCenterLat: Double = 0,
         searchCenterLon: Double = 0,
-        searchRadiusKm: Double = 10
+        searchRadiusKm: Double = 10,
+        triggerEvent: TriggerEvent = .onArrival
     ) {
         self.id = UUID()
         self.title = title
@@ -48,6 +67,7 @@ class Reminder {
         self.searchCenterLat = searchCenterLat
         self.searchCenterLon = searchCenterLon
         self.searchRadiusKm = searchRadiusKm
+        self.triggerEventRaw = triggerEvent.rawValue
         self.isDone = false
         self.createdAt = Date()
     }
