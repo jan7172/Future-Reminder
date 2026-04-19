@@ -333,6 +333,35 @@ class LocationManager: NSObject {
         }
     }
 
+    // MARK: - Snooze
+
+    /// Schedules a time-based notification for an existing reminder.
+    /// Called from AppDelegate when the user taps a snooze action.
+    func snoozeReminder(id reminderID: String, interval: TimeInterval) {
+        guard let container = modelContainer else { return }
+        let context = ModelContext(container)
+        guard let allReminders = try? context.fetch(FetchDescriptor<Reminder>()),
+              let reminder = allReminders.first(where: { $0.id.uuidString == reminderID })
+        else { return }
+
+        let content = makeNotificationContent(
+            for: reminder,
+            locationName: reminder.isCategory ? "" : reminder.locationName,
+            isExit: false
+        )
+        // Override body to indicate it's a snoozed reminder
+        content.body = reminder.locationName.isEmpty
+            ? String(localized: "snooze_notification_body")
+            : String(format: String(localized: "snooze_notification_body_place"), reminder.locationName)
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        let identifier = "snooze_\(reminderID)_\(Int(Date().timeIntervalSince1970))"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error { print("Snooze notification error: \(error)") }
+        }
+    }
+
     // MARK: - Notification content
 
     private func makeNotificationContent(
@@ -352,6 +381,7 @@ class LocationManager: NSObject {
                 : String(format: String(localized: "arrived_at_place"), locationName)
         }
         content.sound = .default
+        content.categoryIdentifier = NotificationCategory.reminder
         content.userInfo = ["reminderID": reminder.id.uuidString]
         return content
     }

@@ -83,6 +83,7 @@ struct DebugView: View {
         content.title = String(localized: "future_reminder")
         content.body = String(localized: "debug_test_notification_body")
         content.sound = .default
+        content.categoryIdentifier = NotificationCategory.reminder  // ← Snooze-Buttons aktiv
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -105,6 +106,8 @@ struct DebugView: View {
             ? String(localized: "arrived_at_location")
             : String(format: String(localized: "arrived_at_place"), reminder.locationName)
         content.sound = .default
+        content.categoryIdentifier = NotificationCategory.reminder  // ← Snooze-Buttons aktiv
+        content.userInfo = ["reminderID": reminder.id.uuidString]   // ← nötig damit Snooze den Reminder findet
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
