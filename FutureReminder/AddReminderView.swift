@@ -71,6 +71,15 @@ struct AddReminderView: View {
         )
     ))
 
+    // Time rule
+    @State private var timeRuleEnabled = false
+    @State private var fromEnabled = false
+    @State private var untilEnabled = false
+    @State private var onlyOnEnabled = false
+    @State private var fromDate = Calendar.current.startOfDay(for: Date())
+    @State private var untilDate = Calendar.current.startOfDay(for: Date())
+    @State private var onlyOnDate = Calendar.current.startOfDay(for: Date())
+
     var canSave: Bool {
         guard !title.isEmpty else { return false }
         if mode == .single { return selectedCoordinate != nil }
@@ -98,7 +107,7 @@ struct AddReminderView: View {
                     TextField(String(localized: "note_optional"), text: $note)
                 }
 
-                // MARK: Mode picker (Single / Category)
+                // MARK: Mode picker
                 Section {
                     Picker("Mode", selection: $mode) {
                         Label("Single Location", systemImage: "mappin.circle.fill")
@@ -114,7 +123,7 @@ struct AddReminderView: View {
                     Text("Trigger Type")
                 }
 
-                // MARK: Trigger event picker (Arrival / Departure / Both)
+                // MARK: Trigger event picker
                 Section {
                     Picker(
                         isGerman ? "Wann erinnern" : "When to Remind",
@@ -124,12 +133,10 @@ struct AddReminderView: View {
                             isGerman ? "Bei Ankunft" : "On Arrival",
                             systemImage: "arrow.down.circle.fill"
                         ).tag(TriggerEvent.onArrival)
-
                         Label(
                             isGerman ? "Beim Verlassen" : "On Departure",
                             systemImage: "arrow.up.circle.fill"
                         ).tag(TriggerEvent.onDeparture)
-
                         Label(
                             isGerman ? "Beides" : "Both",
                             systemImage: "arrow.up.arrow.down.circle.fill"
@@ -142,11 +149,13 @@ struct AddReminderView: View {
                 } header: {
                     Text(isGerman ? "Zeitpunkt" : "When")
                 } footer: {
-                    Text(triggerEventFooter)
-                        .font(.caption)
+                    Text(triggerEventFooter).font(.caption)
                 }
 
-                // MARK: Location section
+                // MARK: Time rule section
+                timeRuleSection
+
+                // MARK: Location
                 if mode == .single {
                     singleLocationSection
                 } else {
@@ -171,6 +180,13 @@ struct AddReminderView: View {
                 foundLocations = []
                 hasSearched = false
             }
+            .onChange(of: onlyOnEnabled) { _, on in
+                // "Nur am" overrides range rules – disable them visually
+                if on {
+                    fromEnabled = false
+                    untilEnabled = false
+                }
+            }
             .onAppear {
                 completer.delegate = completerDelegate
                 completer.resultTypes = .query
@@ -178,7 +194,77 @@ struct AddReminderView: View {
         }
     }
 
-    // MARK: - Footer helper
+    // MARK: - Time Rule Section
+
+    var timeRuleSection: some View {
+        Section {
+            Toggle(
+                isGerman ? "Zeitregel aktivieren" : "Enable Time Rule",
+                isOn: $timeRuleEnabled
+            )
+
+            if timeRuleEnabled {
+                // "Nur am" – exclusive with range rules
+                Toggle(
+                    isGerman ? "Nur am" : "Only on",
+                    isOn: $onlyOnEnabled
+                )
+                if onlyOnEnabled {
+                    DatePicker(
+                        "",
+                        selection: $onlyOnDate,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+                }
+
+                Divider()
+
+                // "Nicht vor"
+                Toggle(
+                    isGerman ? "Nicht vor" : "Not before",
+                    isOn: $fromEnabled
+                )
+                .disabled(onlyOnEnabled)
+
+                if fromEnabled && !onlyOnEnabled {
+                    DatePicker(
+                        "",
+                        selection: $fromDate,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+                }
+
+                // "Nicht nach"
+                Toggle(
+                    isGerman ? "Nicht nach" : "Not after",
+                    isOn: $untilEnabled
+                )
+                .disabled(onlyOnEnabled)
+
+                if untilEnabled && !onlyOnEnabled {
+                    DatePicker(
+                        "",
+                        selection: $untilDate,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+                }
+            }
+        } header: {
+            Text(isGerman ? "Zeitregel (optional)" : "Time Rule (optional)")
+        } footer: {
+            if timeRuleEnabled {
+                Text(timeRuleFooter).font(.caption)
+            }
+        }
+    }
+
+    // MARK: - Footer helpers
 
     private var triggerEventFooter: String {
         switch triggerEvent {
@@ -197,11 +283,31 @@ struct AddReminderView: View {
         }
     }
 
+    private var timeRuleFooter: String {
+        var parts: [String] = []
+        if onlyOnEnabled {
+            let formatted = onlyOnDate.formatted(date: .long, time: .omitted)
+            return isGerman
+                ? "Erinnerung wird nur am \(formatted) ausgelöst."
+                : "Reminder fires only on \(formatted)."
+        }
+        if fromEnabled {
+            let formatted = fromDate.formatted(date: .long, time: .omitted)
+            parts.append(isGerman ? "Nicht vor dem \(formatted)" : "Not before \(formatted)")
+        }
+        if untilEnabled {
+            let formatted = untilDate.formatted(date: .long, time: .omitted)
+            parts.append(isGerman ? "Nicht nach dem \(formatted)" : "Not after \(formatted)")
+        }
+        return parts.isEmpty
+            ? (isGerman ? "Keine Zeitregel gesetzt." : "No time rule set.")
+            : parts.joined(separator: isGerman ? " · " : " · ")
+    }
+
     // MARK: - Single Location Section
 
     var singleLocationSection: some View {
         Section(String(localized: "location_trigger")) {
-
             Button {
                 useCurrentLocation()
             } label: {
@@ -209,8 +315,7 @@ struct AddReminderView: View {
                     if isLoadingLocation {
                         ProgressView().scaleEffect(0.8)
                     } else {
-                        Image(systemName: "location.fill")
-                            .foregroundStyle(.blue)
+                        Image(systemName: "location.fill").foregroundStyle(.blue)
                     }
                     Text(isGerman ? "Meinen Standort verwenden" : "Use My Location")
                         .foregroundStyle(.blue)
@@ -336,7 +441,6 @@ struct AddReminderView: View {
                         }
                     }
                 }
-
             } header: {
                 Text("Category")
             } footer: {
@@ -476,7 +580,7 @@ struct AddReminderView: View {
         }
     }
 
-    // MARK: - Shared UI
+    // MARK: - Shared UI helpers
 
     func searchField(placeholder: String) -> some View {
         HStack {
@@ -518,7 +622,7 @@ struct AddReminderView: View {
         }
     }
 
-    // MARK: - Current Location
+    // MARK: - Current location helpers
 
     private func useCurrentLocation() {
         isLoadingLocation = true
@@ -527,17 +631,19 @@ struct AddReminderView: View {
             isLoadingLocation = false
             return
         }
-        let geocoder = CLGeocoder()
-        let loc = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
-        geocoder.reverseGeocodeLocation(loc) { placemarks, _ in
-            isLoadingLocation = false
-            let name = placemarks?.first?.name
-                ?? placemarks?.first?.locality
-                ?? (isGerman ? "Mein Standort" : "My Location")
-            selectedCoordinate = coord
-            locationName = name
-            searchText = name
-            searchResults = []
+        Task {
+            let loc = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
+            let placemarks = try? await CLGeocoder().reverseGeocodeLocation(loc)
+            await MainActor.run {
+                isLoadingLocation = false
+                let name = placemarks?.first?.name
+                    ?? placemarks?.first?.locality
+                    ?? (isGerman ? "Mein Standort" : "My Location")
+                selectedCoordinate = coord
+                locationName = name
+                searchText = name
+                searchResults = []
+            }
         }
     }
 
@@ -548,19 +654,21 @@ struct AddReminderView: View {
             isLoadingSearchCenter = false
             return
         }
-        let geocoder = CLGeocoder()
-        let loc = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
-        geocoder.reverseGeocodeLocation(loc) { placemarks, _ in
-            isLoadingSearchCenter = false
-            let name = placemarks?.first?.locality
-                ?? placemarks?.first?.name
-                ?? (isGerman ? "Mein Standort" : "My Location")
-            searchCenterCoordinate = coord
-            searchCenterName = name
-            searchText = name
-            searchResults = []
-            foundLocations = []
-            hasSearched = false
+        Task {
+            let loc = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
+            let placemarks = try? await CLGeocoder().reverseGeocodeLocation(loc)
+            await MainActor.run {
+                isLoadingSearchCenter = false
+                let name = placemarks?.first?.locality
+                    ?? placemarks?.first?.name
+                    ?? (isGerman ? "Mein Standort" : "My Location")
+                searchCenterCoordinate = coord
+                searchCenterName = name
+                searchText = name
+                searchResults = []
+                foundLocations = []
+                hasSearched = false
+            }
         }
     }
 
@@ -582,16 +690,14 @@ struct AddReminderView: View {
     }
 
     private func selectSingleLocation(_ item: MKMapItem) {
-        let coord = item.location.coordinate
-        selectedCoordinate = coord
+        selectedCoordinate = item.location.coordinate
         locationName = item.name ?? ""
         searchText = locationName
         searchResults = []
     }
 
     private func selectSearchCenter(_ item: MKMapItem) {
-        let coord = item.location.coordinate
-        searchCenterCoordinate = coord
+        searchCenterCoordinate = item.location.coordinate
         searchCenterName = item.name ?? ""
         searchText = searchCenterName
         searchResults = []
@@ -604,7 +710,6 @@ struct AddReminderView: View {
         isFindingLocations = true
         foundLocations = []
         hasSearched = false
-
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = categoryQuery
         request.resultTypes = [.pointOfInterest]
@@ -613,7 +718,6 @@ struct AddReminderView: View {
             latitudinalMeters: searchRadiusKm * 1000 * 2,
             longitudinalMeters: searchRadiusKm * 1000 * 2
         )
-
         MKLocalSearch(request: request).start { response, _ in
             isFindingLocations = false
             hasSearched = true
@@ -630,13 +734,21 @@ struct AddReminderView: View {
     // MARK: - Save
 
     private func save() {
+        // Resolve time rules
+        let resolvedFrom: Date?    = timeRuleEnabled && fromEnabled && !onlyOnEnabled ? fromDate : nil
+        let resolvedUntil: Date?   = timeRuleEnabled && untilEnabled && !onlyOnEnabled ? untilDate : nil
+        let resolvedOnlyOn: Date?  = timeRuleEnabled && onlyOnEnabled ? onlyOnDate : nil
+
         if mode == .single {
             guard let coord = selectedCoordinate else { return }
             let reminder = Reminder(
                 title: title, note: note,
                 latitude: coord.latitude, longitude: coord.longitude,
                 radius: radius, locationName: locationName,
-                triggerEvent: triggerEvent
+                triggerEvent: triggerEvent,
+                activeFrom: resolvedFrom,
+                activeUntil: resolvedUntil,
+                activeOnlyOn: resolvedOnlyOn
             )
             modelContext.insert(reminder)
             LocationManager.shared.scheduleNotification(for: reminder)
@@ -649,7 +761,10 @@ struct AddReminderView: View {
                 searchCenterLat: center.latitude,
                 searchCenterLon: center.longitude,
                 searchRadiusKm: searchRadiusKm,
-                triggerEvent: triggerEvent
+                triggerEvent: triggerEvent,
+                activeFrom: resolvedFrom,
+                activeUntil: resolvedUntil,
+                activeOnlyOn: resolvedOnlyOn
             )
             modelContext.insert(reminder)
             LocationManager.shared.scheduleNotification(for: reminder)

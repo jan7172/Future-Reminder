@@ -7,6 +7,15 @@ struct FutureReminderApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
+    // Container selbst erstellen statt .modelContainer(for:) zu nutzen
+    let container: ModelContainer = {
+        do {
+            return try ModelContainer(for: Reminder.self)
+        } catch {
+            fatalError("ModelContainer konnte nicht erstellt werden: \(error)")
+        }
+    }()
+
     init() {
         LocationManager.shared.requestLocationPermission()
         LocationManager.shared.requestNotificationPermission()
@@ -15,8 +24,11 @@ struct FutureReminderApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .onAppear {
+                    LocationManager.shared.modelContainer = container  // ← hier
+                }
         }
-        .modelContainer(for: Reminder.self)
+        .modelContainer(container)  // ← denselben Container übergeben
     }
 }
 

@@ -30,7 +30,7 @@ class Reminder {
     var searchCenterLon: Double
     var searchRadiusKm: Double
 
-    // Trigger event (default: onArrival – backwards compatible with existing records)
+    // Trigger event (raw String for SwiftData compatibility)
     var triggerEventRaw: String
 
     var triggerEvent: TriggerEvent {
@@ -38,8 +38,44 @@ class Reminder {
         set { triggerEventRaw = newValue.rawValue }
     }
 
+    // Time rules – all optional, nil = no restriction
+    var activeFrom: Date?    // nicht vor diesem Datum
+    var activeUntil: Date?   // nicht nach diesem Datum (inklusive, End of Day)
+    var activeOnlyOn: Date?  // nur an diesem Kalendertag
+
     var isDone: Bool
     var createdAt: Date
+
+    // MARK: - Computed helpers
+
+    var hasTimeRule: Bool {
+        activeFrom != nil || activeUntil != nil || activeOnlyOn != nil
+    }
+
+    /// True wenn der aktuelle Zeitpunkt alle gesetzten Zeitregeln erfüllt.
+    var isActiveNow: Bool {
+        let now = Date()
+        let calendar = Calendar.current
+
+        // "Nur am" hat Vorrang vor den Bereichsregeln
+        if let onlyOn = activeOnlyOn {
+            return calendar.isDate(now, inSameDayAs: onlyOn)
+        }
+        // "Nicht vor"
+        if let from = activeFrom, now < calendar.startOfDay(for: from) {
+            return false
+        }
+        // "Nicht nach" – inklusive bis End of Day
+        if let until = activeUntil {
+            let endOfDay = calendar.date(
+                bySettingHour: 23, minute: 59, second: 59, of: until
+            ) ?? until
+            if now > endOfDay { return false }
+        }
+        return true
+    }
+
+    // MARK: - Init
 
     init(
         title: String,
@@ -53,7 +89,10 @@ class Reminder {
         searchCenterLat: Double = 0,
         searchCenterLon: Double = 0,
         searchRadiusKm: Double = 10,
-        triggerEvent: TriggerEvent = .onArrival
+        triggerEvent: TriggerEvent = .onArrival,
+        activeFrom: Date? = nil,
+        activeUntil: Date? = nil,
+        activeOnlyOn: Date? = nil
     ) {
         self.id = UUID()
         self.title = title
@@ -68,6 +107,9 @@ class Reminder {
         self.searchCenterLon = searchCenterLon
         self.searchRadiusKm = searchRadiusKm
         self.triggerEventRaw = triggerEvent.rawValue
+        self.activeFrom = activeFrom
+        self.activeUntil = activeUntil
+        self.activeOnlyOn = activeOnlyOn
         self.isDone = false
         self.createdAt = Date()
     }
