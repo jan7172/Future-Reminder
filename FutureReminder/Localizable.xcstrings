@@ -1,1809 +1,711 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "%lld location%@ found — %lld geofence%@ will be registered" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld Ort%2$@ gefunden — %3$lld Geofence%4$@ werden eingerichtet"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld location%2$@ found — %3$lld geofence%4$@ will be registered"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld Ort%2$@ gefunden — %3$lld Geofence%4$@ werden eingerichtet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld location%2$@ found — %3$lld geofence%4$@ will be registered" } }
       }
     },
     "%lld locations found — %lld geofences will be registered" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld Orte gefunden — %2$lld Geofences werden eingerichtet"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld locations found — %2$lld geofences will be registered"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld Orte gefunden — %2$lld Geofences werden eingerichtet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld locations found — %2$lld geofences will be registered" } }
       }
     },
     "%lld Orte gefunden — %lld Geofences werden registriert" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld Orte gefunden — %2$lld Geofences werden eingerichtet"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld locations found — %2$lld geofences will be registered"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld Orte gefunden — %2$lld Geofences werden eingerichtet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld locations found — %2$lld geofences will be registered" } }
       }
     },
     "🛠 Debug Menu" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🛠 Debug-Menü"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🛠 Debug Menu"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "🛠 Debug-Menü" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "🛠 Debug Menu" } }
       }
     },
     "active" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiv"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Active"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Aktiv" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Active" } }
       }
     },
     "Active Reminders" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktive Erinnerungen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Active Reminders"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Aktive Erinnerungen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Active Reminders" } }
       }
     },
     "arrived_at_location" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du hast den Ort für deine Erinnerung erreicht."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You've arrived at your reminder location."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Du hast den Ort für deine Erinnerung erreicht." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You've arrived at your reminder location." } }
       }
     },
     "arrived_at_place" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du bist bei %@ angekommen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You've arrived at %@."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Du bist bei %@ angekommen." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You've arrived at %@." } }
       }
-    },
-    "Bei Ankunft" : {
-
-    },
-    "Beides" : {
-      "comment" : "A segmented control option that allows the user to be reminded at both the arrival and departure of a location.",
-      "isCommentAutoGenerated" : true
-    },
-    "Beim Verlassen" : {
-      "comment" : "A label for a trigger event that occurs when a user departs a place.",
-      "isCommentAutoGenerated" : true
-    },
-    "Both" : {
-      "comment" : "One of the three options for when to be reminded (both on arrival and departure).",
-      "isCommentAutoGenerated" : true
     },
     "cancel" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abbrechen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Abbrechen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } }
+      }
+    },
+    "category_query_label" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suche" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Query" } }
       }
     },
     "Category" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kategorie"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Category"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Kategorie" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Category" } }
       }
     },
     "close" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schließen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Close"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Schließen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Close" } }
       }
     },
     "Close" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schließen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Close"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Schließen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Close" } }
       }
     },
     "debug_location_always" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Immer"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Immer" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Always" } }
       }
     },
     "debug_location_when_in_use" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Während der Verwendung"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When In Use"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Während der Verwendung" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "When In Use" } }
       }
     },
     "debug_log_reregistered" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld Geofence(s) erneut eingerichtet"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Re-registered %lld geofence(s)"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "%lld Geofence(s) erneut eingerichtet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Re-registered %lld geofence(s)" } }
       }
     },
     "debug_log_test_scheduled" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Testbenachrichtigung geplant – wird in 5 s ausgelöst"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Test notification scheduled – fires in 5s"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Testbenachrichtigung geplant – wird in 5 s ausgelöst" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Test notification scheduled – fires in 5s" } }
       }
     },
     "debug_log_triggered" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ausgelöst: %@ – wird in 3 s gesendet"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Triggered: %@ – fires in 3s"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Ausgelöst: %@ – wird in 3 s gesendet" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Triggered: %@ – fires in 3s" } }
       }
     },
     "debug_menu" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🛠 Debug-Menü"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🛠 Debug Menu"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "🛠 Debug-Menü" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "🛠 Debug Menu" } }
       }
     },
     "debug_status_authorized" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zugriff erlaubt"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Authorized"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zugriff erlaubt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Authorized" } }
       }
     },
     "debug_status_denied" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zugriff verweigert"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Denied"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zugriff verweigert" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Denied" } }
       }
     },
     "debug_status_not_determined" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noch nicht festgelegt"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not determined"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Noch nicht festgelegt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not determined" } }
       }
     },
     "debug_test_notification_body" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dies ist eine Testbenachrichtigung. Alles funktioniert! ✅"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This is a test notification. Everything works! ✅"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dies ist eine Testbenachrichtigung. Alles funktioniert! ✅" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This is a test notification. Everything works! ✅" } }
       }
     },
     "delete_reminder" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erinnerung löschen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Reminder"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erinnerung löschen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Reminder" } }
+      }
+    },
+    "detail_when" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zeitpunkt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "When" } }
       }
     },
     "done" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fertig"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Fertig" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done" } }
       }
     },
     "Du wirst an jedem passenden Ort im Suchbereich erinnert." : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du wirst an jedem passenden Ort im Suchbereich erinnert."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You'll be reminded at every matching location in the search area."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Du wirst an jedem passenden Ort im Suchbereich erinnert." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You'll be reminded at every matching location in the search area." } }
       }
     },
     "e.g. Pharmacy, Supermarket, Gas Station" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "z. B. Apotheke, Supermarkt, Tankstelle"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "e.g. Pharmacy, Supermarket, Gas Station"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "z. B. Apotheke, Supermarkt, Tankstelle" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "e.g. Pharmacy, Supermarket, Gas Station" } }
       }
     },
     "e.g. Pharmacy, Supermarket…" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "z. B. Apotheke, Supermarkt…"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "e.g. Pharmacy, Supermarket…"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "z. B. Apotheke, Supermarkt…" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "e.g. Pharmacy, Supermarket…" } }
       }
     },
     "edit" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bearbeiten"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bearbeiten" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit" } }
       }
     },
     "edit_reminder" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erinnerung bearbeiten"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Reminder"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erinnerung bearbeiten" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Reminder" } }
       }
-    },
-    "Enable Time Rule" : {
-      "comment" : "A toggle that enables or disables the time rule.",
-      "isCommentAutoGenerated" : true
     },
     "Find Locations" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Orte finden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find Locations"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Orte finden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Find Locations" } }
       }
     },
     "Fire Test Notification (5s)" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Testbenachrichtigung auslösen (5 s)"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fire Test Notification (5s)"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Testbenachrichtigung auslösen (5 s)" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fire Test Notification (5s)" } }
       }
     },
     "Found Locations" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gefundene Orte"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Found Locations"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Gefundene Orte" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Found Locations" } }
       }
     },
     "Future Reminder überwacht die nächstgelegenen Orte von diesem Punkt aus." : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Future Reminder überwacht die nächstgelegenen Orte ab diesem Punkt."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Future Reminder will monitor the nearest locations from this point."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Future Reminder überwacht die nächstgelegenen Orte ab diesem Punkt." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Future Reminder will monitor the nearest locations from this point." } }
       }
     },
     "Future Reminder will monitor the nearest locations from this point." : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Future Reminder überwacht die nächstgelegenen Orte ab diesem Punkt."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Future Reminder will monitor the nearest locations from this point."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Future Reminder überwacht die nächstgelegenen Orte ab diesem Punkt." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Future Reminder will monitor the nearest locations from this point." } }
       }
     },
     "future_reminder" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Future Reminder"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Future Reminder"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Future Reminder" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Future Reminder" } }
       }
     },
     "Gefundene Orte" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gefundene Orte"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Found Locations"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Gefundene Orte" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Found Locations" } }
       }
     },
     "Geofence Actions" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geofence-Aktionen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geofence Actions"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Geofence-Aktionen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Geofence Actions" } }
       }
     },
     "get_started" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los geht's"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get Started"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Los geht's" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Get Started" } }
       }
-    },
-    "Kategorie" : {
-      "comment" : "A section that appears when a reminder is set to trigger based on a category.",
-      "isCommentAutoGenerated" : true
     },
     "Keine Orte gefunden" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Orte gefunden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No locations found"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Keine Orte gefunden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No locations found" } }
       }
     },
     "left_location" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du hast den Ort deiner Erinnerung verlassen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You've left your reminder location."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Du hast den Ort deiner Erinnerung verlassen." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You've left your reminder location." } }
       }
     },
     "left_place" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du hast %@ verlassen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You've left %@."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Du hast %@ verlassen." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You've left %@." } }
       }
     },
     "Location" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ort"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Ort" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Location" } }
       }
     },
     "location_name_placeholder" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ortsname (z. B. Supermarkt)"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location name (e.g. Supermarket)"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Ortsname (z. B. Supermarkt)" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Location name (e.g. Supermarket)" } }
       }
     },
     "location_trigger" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ortsauslöser"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location Trigger"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Ortsauslöser" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Location Trigger" } }
       }
     },
     "Log" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Protokoll"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Protokoll" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Log" } }
       }
     },
     "mark_as_done" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Als erledigt markieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mark as Done"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Als erledigt markieren" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mark as Done" } }
       }
     },
     "Meinen Standort als Mittelpunkt" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meinen Standort als Mittelpunkt verwenden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use My Location as Center"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Meinen Standort als Mittelpunkt verwenden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use My Location as Center" } }
       }
     },
     "Meinen Standort verwenden" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meinen Standort verwenden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use My Location"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Meinen Standort verwenden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use My Location" } }
       }
-    },
-    "Mittelpunkt suchen…" : {
-
     },
     "Mode" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Modus"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Modus" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mode" } }
       }
     },
     "Monitored Regions" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Überwachte Bereiche"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monitored Regions"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Überwachte Bereiche" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Monitored Regions" } }
       }
     },
     "new_reminder" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neue Erinnerung"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New Reminder"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Neue Erinnerung" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Reminder" } }
       }
-    },
-    "Nicht nach" : {
-      "comment" : "A toggle that enables or disables the \"Not after\" option in the time rule section of the `AddReminderView`.",
-      "isCommentAutoGenerated" : true
-    },
-    "Nicht vor" : {
-      "comment" : "A toggle for excluding times before a certain time.",
-      "isCommentAutoGenerated" : true
     },
     "No locations found" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Orte gefunden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No locations found"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Keine Orte gefunden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No locations found" } }
       }
     },
     "no_reminders" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keine Erinnerungen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Reminders"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Keine Erinnerungen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No Reminders" } }
       }
     },
     "no_reminders_description" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Füge eine Erinnerung hinzu und lege einen Ort als Auslöser fest."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add a reminder and set a location as trigger."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Füge eine Erinnerung hinzu und lege einen Ort als Auslöser fest." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add a reminder and set a location as trigger." } }
       }
-    },
-    "Not after" : {
-      "comment" : "A label describing a toggle that enables or disables the \"Not after\" option in the \"Add Reminder\" view.",
-      "isCommentAutoGenerated" : true
-    },
-    "Not before" : {
-      "comment" : "A toggle that enables or disables the \"Not before\" option in the AddReminderView.",
-      "isCommentAutoGenerated" : true
     },
     "note_optional" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notiz (optional)"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Note (optional)"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Notiz (optional)" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Note (optional)" } }
       }
     },
     "Notifications" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Benachrichtigungen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Benachrichtigungen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications" } }
       }
-    },
-    "Nur am" : {
-      "comment" : "A toggle that enables or disables the \"Only on\" option in the time rule section of the `AddReminderView`.",
-      "isCommentAutoGenerated" : true
-    },
-    "On Arrival" : {
-
-    },
-    "On Departure" : {
-      "comment" : "A picker option for when to remind about an event when the user departs a location.",
-      "isCommentAutoGenerated" : true
     },
     "onboarding_feature_location_description" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lege jeden Ort für deine Erinnerung fest."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set any place as a trigger for your reminder."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Lege jeden Ort für deine Erinnerung fest." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Set any place as a trigger for your reminder." } }
       }
     },
     "onboarding_feature_location_title" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erinnerungen am Ort"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location Triggers"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erinnerungen am Ort" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Location Triggers" } }
       }
     },
     "onboarding_feature_notification_description" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du wirst erinnert, sobald du ankommst."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get notified the moment you arrive."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Du wirst erinnert, sobald du ankommst." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Get notified the moment you arrive." } }
       }
     },
     "onboarding_feature_notification_title" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automatische Benachrichtigungen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automatic Notifications"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Automatische Benachrichtigungen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Automatic Notifications" } }
       }
     },
     "onboarding_feature_privacy_description" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alle Daten bleiben auf deinem Gerät. Keine Cloud, kein Tracking."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All data stays on your device. No cloud, no tracking."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Alle Daten bleiben auf deinem Gerät. Keine Cloud, kein Tracking." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All data stays on your device. No cloud, no tracking." } }
       }
     },
     "onboarding_feature_privacy_title" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "100 % privat"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "100% Private"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "100 % privat" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "100% Private" } }
       }
     },
     "onboarding_subtitle" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erinnerungen genau dann, wenn du ankommst – nicht zu einer festen Uhrzeit."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reminders that trigger when\nyou arrive – not just at a fixed time."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erinnerungen genau dann, wenn du ankommst – nicht zu einer festen Uhrzeit." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reminders that trigger when\nyou arrive – not just at a fixed time." } }
       }
-    },
-    "Only on" : {
-      "comment" : "A toggle that allows the user to set a reminder only on a specific date.",
-      "isCommentAutoGenerated" : true
     },
     "Orte suchen" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Orte finden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find Locations"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Orte finden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Find Locations" } }
       }
     },
     "Preview Locations" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Orte anzeigen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preview Locations"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Orte anzeigen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Preview Locations" } }
       }
-    },
-    "Query" : {
-      "comment" : "A label for the query used in a location-triggered reminder.",
-      "isCommentAutoGenerated" : true
     },
     "Radius" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Radius"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Radius"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Radius" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Radius" } }
       }
     },
     "radius_label" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Radius: %d m"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Radius: %d m"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Radius: %d m" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Radius: %d m" } }
       }
     },
     "Radius: %lld m" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Radius: %lld m"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Radius: %lld m"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Radius: %lld m" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Radius: %lld m" } }
       }
     },
     "Re-register all Geofences" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alle Geofences erneut einrichten"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Re-register all Geofences"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Alle Geofences erneut einrichten" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Re-register all Geofences" } }
       }
     },
     "reminder_section" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erinnerung"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reminder"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erinnerung" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reminder" } }
       }
     },
     "save" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Speichern"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Speichern" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save" } }
       }
     },
     "Search Center" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suchzentrum"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search Center"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suchzentrum" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search Center" } }
       }
     },
     "Search center location…" : {
+      "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ort für das Suchzentrum suchen…"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search center location…"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Ort für das Suchzentrum suchen…" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search center location…" } }
       }
     },
     "Search for a center location" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einen Ort für das Suchzentrum suchen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search for a center location"
-          }
-        }
-      }
-    },
-    "Search radius" : {
-      "comment" : "A label describing the search radius for a category-based reminder.",
-      "isCommentAutoGenerated" : true
-    },
-    "Search radius: %lld km" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suchradius: %lld km"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search radius: %lld km"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Einen Ort für das Suchzentrum suchen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search for a center location" } }
       }
     },
     "search_location_hint" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oben nach einem Ort suchen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search for a location above"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Oben nach einem Ort suchen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search for a location above" } }
       }
     },
     "search_placeholder" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adresse oder Ort suchen…"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search address or place..."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Adresse oder Ort suchen…" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search address or place..." } }
+      }
+    },
+    "search_radius_km_value" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suchradius: %lld km" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search radius: %lld km" } }
+      }
+    },
+    "search_radius_label" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suchradius" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search radius" } }
+      }
+    },
+    "Search radius: %lld km" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suchradius: %lld km" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search radius: %lld km" } }
       }
     },
     "Searching for %@…" : {
       "extractionState" : "stale",
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ wird gesucht…"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Searching for %@…"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "%@ wird gesucht…" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Searching for %@…" } }
       }
     },
     "Searching…" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suche läuft…"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Searching…"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suche läuft…" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Searching…" } }
       }
     },
     "Single Location" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einzelner Ort"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Single Location"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Einzelner Ort" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Single Location" } }
       }
     },
     "snooze_1h" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 Stunde erinnern"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remind in 1 hour"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "1 Stunde erinnern" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remind in 1 hour" } }
       }
     },
     "snooze_30min" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "30 Minuten erinnern"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remind in 30 min"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "30 Minuten erinnern" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remind in 30 min" } }
       }
     },
     "snooze_notification_body" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deine verschobene Erinnerung."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your snoozed reminder."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Deine verschobene Erinnerung." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your snoozed reminder." } }
       }
     },
     "snooze_notification_body_place" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verschobene Erinnerung für %@."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Snoozed reminder for %@."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Verschobene Erinnerung für %@." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Snoozed reminder for %@." } }
       }
     },
     "status" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Status"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Status"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Status" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Status" } }
       }
     },
     "status_done" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erledigt ✓"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done ✓"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erledigt ✓" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done ✓" } }
       }
     },
     "status_open" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Offen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Offen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open" } }
       }
     },
     "Stop all Monitoring" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gesamte Überwachung beenden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop all Monitoring"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Gesamte Überwachung beenden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Stop all Monitoring" } }
       }
-    },
-    "Suche" : {
-      "comment" : "A label for the search query in the location-based reminder detail view.",
-      "isCommentAutoGenerated" : true
     },
     "Suche läuft…" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suche läuft…"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Searching…"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suche läuft…" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Searching…" } }
       }
     },
     "Suchmittelpunkt" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suchzentrum"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search Center"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suchzentrum" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search Center" } }
       }
-    },
-    "Suchradius" : {
-      "comment" : "A label describing the search radius for a category-based reminder.",
-      "isCommentAutoGenerated" : true
     },
     "Suchradius: %lld km" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suchradius: %lld km"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search radius: %lld km"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Suchradius: %lld km" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search radius: %lld km" } }
       }
     },
     "System Status" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Systemstatus"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "System Status"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Systemstatus" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System Status" } }
       }
     },
-    "Time Rule" : {
-      "comment" : "A section header for the time rule of a reminder.",
-      "isCommentAutoGenerated" : true
+    "time_rule" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zeitregel" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Time Rule" } }
+      }
     },
-    "Time Rule (optional)" : {
-      "comment" : "A label describing the optional \"Time Rule\" section in the \"Add Reminder\" view.",
-      "isCommentAutoGenerated" : true
+    "time_rule_enable" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zeitregel aktivieren" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enable Time Rule" } }
+      }
+    },
+    "time_rule_not_after" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Nicht nach" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not after" } }
+      }
+    },
+    "time_rule_not_before" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Nicht vor" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not before" } }
+      }
+    },
+    "time_rule_only_on" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Nur am" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Only on" } }
+      }
+    },
+    "time_rule_optional" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zeitregel (optional)" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Time Rule (optional)" } }
+      }
     },
     "title_field" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Titel"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Title"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Titel" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Title" } }
       }
     },
     "trigger" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auslöser"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trigger"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Auslöser" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Trigger" } }
+      }
+    },
+    "trigger_both" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Beides" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Both" } }
+      }
+    },
+    "trigger_on_arrival" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bei Ankunft" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "On Arrival" } }
+      }
+    },
+    "trigger_on_departure" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Beim Verlassen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "On Departure" } }
       }
     },
     "Trigger Tests" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auslöser-Tests"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trigger Tests"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Auslöser-Tests" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Trigger Tests" } }
       }
     },
     "Trigger Type" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auslösertyp"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trigger Type"
-          }
-        }
-      }
-    },
-    "trigger_both" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beides"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Both"
-          }
-        }
-      }
-    },
-    "trigger_on_arrival" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bei Ankunft"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On Arrival"
-          }
-        }
-      }
-    },
-    "trigger_on_departure" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beim Verlassen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On Departure"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Auslösertyp" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Trigger Type" } }
       }
     },
     "Trigger: %@" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auslöser: %@"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trigger: %@"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Auslöser: %@" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Trigger: %@" } }
       }
     },
     "unknown" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unbekannt"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Unbekannt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unknown" } }
       }
     },
     "Use My Location" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meinen Standort verwenden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use My Location"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Meinen Standort verwenden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use My Location" } }
       }
     },
     "Use My Location as Center" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meinen Standort als Mittelpunkt verwenden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use My Location as Center"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Meinen Standort als Mittelpunkt verwenden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use My Location as Center" } }
       }
     },
-    "Wann erinnern" : {
-      "comment" : "A label describing the option to set a reminder's trigger time.",
-      "isCommentAutoGenerated" : true
-    },
-    "When" : {
-      "comment" : "A label displayed above the section that lets users select when they want to be reminded.",
-      "isCommentAutoGenerated" : true
-    },
-    "When to Remind" : {
-      "comment" : "A label describing the picker for selecting when to be reminded.",
-      "isCommentAutoGenerated" : true
+    "when_to_remind" : {
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Wann erinnern" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "When to Remind" } }
+      }
     },
     "You'll be reminded at every matching location in the search area." : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du wirst an jedem passenden Ort im Suchbereich erinnert."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You'll be reminded at every matching location in the search area."
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Du wirst an jedem passenden Ort im Suchbereich erinnert." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You'll be reminded at every matching location in the search area." } }
       }
     },
     "z. B. Apotheke, Supermarkt…" : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "z. B. Apotheke, Supermarkt…"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "e.g. Pharmacy, Supermarket…"
-          }
-        }
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "z. B. Apotheke, Supermarkt…" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "e.g. Pharmacy, Supermarket…" } }
       }
-    },
-    "Zeitpunkt" : {
-      "comment" : "A section header that translates to \"When\" in English.",
-      "isCommentAutoGenerated" : true
-    },
-    "Zeitregel" : {
-      "comment" : "A section title that translates to \"Time Rule\".",
-      "isCommentAutoGenerated" : true
-    },
-    "Zeitregel (optional)" : {
-      "comment" : "A header for the \"Time Rule (optional)\" section in the \"Add Reminder\" view.",
-      "isCommentAutoGenerated" : true
-    },
-    "Zeitregel aktivieren" : {
-      "comment" : "A label for enabling the \"Time Rule\" toggle.",
-      "isCommentAutoGenerated" : true
     }
   },
   "version" : "1.1"

@@ -46,10 +46,6 @@ struct ReminderDetailView: View {
     @State private var untilDate = Calendar.current.startOfDay(for: Date())
     @State private var onlyOnDate = Calendar.current.startOfDay(for: Date())
 
-    var isGerman: Bool {
-        Locale.current.language.languageCode?.identifier == "de"
-    }
-
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: reminder.latitude, longitude: reminder.longitude)
     }
@@ -85,47 +81,46 @@ struct ReminderDetailView: View {
 
     @ViewBuilder
     var detailView: some View {
-        // Reminder info
         Section(String(localized: "reminder_section")) {
             LabeledContent(String(localized: "title_field"), value: reminder.title)
             if !reminder.note.isEmpty {
                 LabeledContent(String(localized: "note_optional"), value: reminder.note)
             }
             LabeledContent(String(localized: "status"),
-                value: reminder.isDone ? String(localized: "status_done") : String(localized: "status_open"))
+                value: reminder.isDone
+                    ? String(localized: "status_done")
+                    : String(localized: "status_open"))
         }
 
-        // Trigger event
         Section {
-            LabeledContent(isGerman ? "Zeitpunkt" : "When") {
-                Text(triggerEventLabel(reminder.triggerEvent))
+            LabeledContent(String(localized: "detail_when")) {
+                Text(String(localized: triggerEventKey(reminder.triggerEvent)))
                     .foregroundStyle(.secondary)
             }
         }
 
-        // Time rule
         if reminder.hasTimeRule {
-            Section(isGerman ? "Zeitregel" : "Time Rule") {
+            Section(String(localized: "time_rule")) {
                 if let onlyOn = reminder.activeOnlyOn {
-                    LabeledContent(isGerman ? "Nur am" : "Only on",
+                    LabeledContent(String(localized: "time_rule_only_on"),
                         value: onlyOn.formatted(date: .long, time: .omitted))
                 }
                 if let from = reminder.activeFrom {
-                    LabeledContent(isGerman ? "Nicht vor" : "Not before",
+                    LabeledContent(String(localized: "time_rule_not_before"),
                         value: from.formatted(date: .long, time: .omitted))
                 }
                 if let until = reminder.activeUntil {
-                    LabeledContent(isGerman ? "Nicht nach" : "Not after",
+                    LabeledContent(String(localized: "time_rule_not_after"),
                         value: until.formatted(date: .long, time: .omitted))
                 }
             }
         }
 
-        // Location
         if reminder.isCategory {
-            Section(isGerman ? "Kategorie" : "Category") {
-                LabeledContent(isGerman ? "Suche" : "Query", value: reminder.categoryQuery)
-                LabeledContent(isGerman ? "Suchradius" : "Search radius",
+            Section(String(localized: "Category")) {
+                LabeledContent(String(localized: "category_query_label"),
+                    value: reminder.categoryQuery)
+                LabeledContent(String(localized: "search_radius_label"),
                     value: "\(Int(reminder.searchRadiusKm)) km")
 
                 let center = CLLocationCoordinate2D(
@@ -161,7 +156,9 @@ struct ReminderDetailView: View {
 
                 Map {
                     Marker(
-                        reminder.locationName.isEmpty ? String(localized: "trigger") : reminder.locationName,
+                        reminder.locationName.isEmpty
+                            ? String(localized: "trigger")
+                            : reminder.locationName,
                         coordinate: coordinate
                     )
                     MapCircle(center: coordinate, radius: reminder.radius)
@@ -174,7 +171,6 @@ struct ReminderDetailView: View {
             }
         }
 
-        // Actions
         Section {
             if !reminder.isDone {
                 Button {
@@ -200,20 +196,18 @@ struct ReminderDetailView: View {
 
     @ViewBuilder
     var editView: some View {
-        // Reminder info
         Section(String(localized: "reminder_section")) {
             TextField(String(localized: "title_field"), text: $editTitle)
             TextField(String(localized: "note_optional"), text: $editNote)
         }
 
-        // Trigger event picker
         Section {
-            Picker(isGerman ? "Wann erinnern" : "When to Remind", selection: $editTriggerEvent) {
-                Label(isGerman ? "Bei Ankunft" : "On Arrival",
+            Picker(String(localized: "when_to_remind"), selection: $editTriggerEvent) {
+                Label(String(localized: "trigger_on_arrival"),
                       systemImage: "arrow.down.circle.fill").tag(TriggerEvent.onArrival)
-                Label(isGerman ? "Beim Verlassen" : "On Departure",
+                Label(String(localized: "trigger_on_departure"),
                       systemImage: "arrow.up.circle.fill").tag(TriggerEvent.onDeparture)
-                Label(isGerman ? "Beides" : "Both",
+                Label(String(localized: "trigger_both"),
                       systemImage: "arrow.up.arrow.down.circle.fill").tag(TriggerEvent.both)
             }
             .pickerStyle(.segmented)
@@ -221,15 +215,14 @@ struct ReminderDetailView: View {
             .listRowInsets(.init())
             .padding(.vertical, 4)
         } header: {
-            Text(isGerman ? "Zeitpunkt" : "When")
+            Text(String(localized: "detail_when"))
         }
 
-        // Time rule
         Section {
-            Toggle(isGerman ? "Zeitregel aktivieren" : "Enable Time Rule", isOn: $timeRuleEnabled)
+            Toggle(String(localized: "time_rule_enable"), isOn: $timeRuleEnabled)
 
             if timeRuleEnabled {
-                Toggle(isGerman ? "Nur am" : "Only on", isOn: $onlyOnEnabled)
+                Toggle(String(localized: "time_rule_only_on"), isOn: $onlyOnEnabled)
                 if onlyOnEnabled {
                     DatePicker("", selection: $onlyOnDate, displayedComponents: .date)
                         .datePickerStyle(.compact).labelsHidden()
@@ -237,14 +230,14 @@ struct ReminderDetailView: View {
 
                 Divider()
 
-                Toggle(isGerman ? "Nicht vor" : "Not before", isOn: $fromEnabled)
+                Toggle(String(localized: "time_rule_not_before"), isOn: $fromEnabled)
                     .disabled(onlyOnEnabled)
                 if fromEnabled && !onlyOnEnabled {
                     DatePicker("", selection: $fromDate, displayedComponents: .date)
                         .datePickerStyle(.compact).labelsHidden()
                 }
 
-                Toggle(isGerman ? "Nicht nach" : "Not after", isOn: $untilEnabled)
+                Toggle(String(localized: "time_rule_not_after"), isOn: $untilEnabled)
                     .disabled(onlyOnEnabled)
                 if untilEnabled && !onlyOnEnabled {
                     DatePicker("", selection: $untilDate, displayedComponents: .date)
@@ -252,13 +245,12 @@ struct ReminderDetailView: View {
                 }
             }
         } header: {
-            Text(isGerman ? "Zeitregel (optional)" : "Time Rule (optional)")
+            Text(String(localized: "time_rule_optional"))
         }
         .onChange(of: onlyOnEnabled) { _, on in
             if on { fromEnabled = false; untilEnabled = false }
         }
 
-        // Location (category vs single)
         if reminder.isCategory {
             categoryEditSection
         } else {
@@ -323,26 +315,21 @@ struct ReminderDetailView: View {
 
     @ViewBuilder
     var categoryEditSection: some View {
-        Section(isGerman ? "Kategorie" : "Category") {
+        Section(String(localized: "Category")) {
             HStack {
                 Image(systemName: "tag.fill").foregroundStyle(.blue)
-                TextField(
-                    isGerman ? "z. B. Apotheke, Supermarkt…" : "e.g. Pharmacy, Supermarket…",
-                    text: $editCategoryQuery
-                )
-                .autocorrectionDisabled()
+                TextField(String(localized: "e.g. Pharmacy, Supermarket…"),
+                          text: $editCategoryQuery)
+                    .autocorrectionDisabled()
             }
         }
 
-        Section(isGerman ? "Suchmittelpunkt" : "Search Center") {
+        Section(String(localized: "Search Center")) {
             HStack {
                 Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
-                TextField(
-                    isGerman ? "Mittelpunkt suchen…" : "Search center location…",
-                    text: $searchText
-                )
-                .autocorrectionDisabled()
-                .onSubmit { searchLocation() }
+                TextField(String(localized: "Search center location…"), text: $searchText)
+                    .autocorrectionDisabled()
+                    .onSubmit { searchLocation() }
                 if !searchText.isEmpty {
                     Button {
                         searchText = ""
@@ -386,9 +373,8 @@ struct ReminderDetailView: View {
                 .disabled(true)
 
                 HStack {
-                    Text(isGerman
-                         ? "Suchradius: \(Int(editSearchRadiusKm)) km"
-                         : "Search radius: \(Int(editSearchRadiusKm)) km")
+                    Text(String(format: String(localized: "search_radius_km_value"),
+                                Int(editSearchRadiusKm)))
                     Slider(value: $editSearchRadiusKm, in: 1...50, step: 1)
                 }
             }
@@ -439,37 +425,30 @@ struct ReminderDetailView: View {
         editNote         = reminder.note
         editTriggerEvent = reminder.triggerEvent
 
-        // Time rules
         timeRuleEnabled = reminder.hasTimeRule
         if let onlyOn = reminder.activeOnlyOn {
             onlyOnEnabled = true
             onlyOnDate    = onlyOn
         } else {
             onlyOnEnabled = false
-            if let from = reminder.activeFrom {
-                fromEnabled = true
-                fromDate    = from
-            }
-            if let until = reminder.activeUntil {
-                untilEnabled = true
-                untilDate    = until
-            }
+            if let from = reminder.activeFrom  { fromEnabled  = true; fromDate  = from }
+            if let until = reminder.activeUntil { untilEnabled = true; untilDate = until }
         }
 
         if reminder.isCategory {
-            editCategoryQuery            = reminder.categoryQuery
-            editSearchRadiusKm           = reminder.searchRadiusKm
-            editSearchCenterCoordinate   = CLLocationCoordinate2D(
+            editCategoryQuery          = reminder.categoryQuery
+            editSearchRadiusKm         = reminder.searchRadiusKm
+            editSearchCenterCoordinate = CLLocationCoordinate2D(
                 latitude: reminder.searchCenterLat,
                 longitude: reminder.searchCenterLon
             )
-            editSearchCenterName         = ""  // no reverse geocode needed for display
+            editSearchCenterName = ""
         } else {
-            editLocationName  = reminder.locationName
-            editRadius        = reminder.radius
-            editCoordinate    = coordinate
-            searchText        = reminder.locationName
-            mapPosition       = .region(MKCoordinateRegion(
+            editLocationName = reminder.locationName
+            editRadius       = reminder.radius
+            editCoordinate   = coordinate
+            searchText       = reminder.locationName
+            mapPosition      = .region(MKCoordinateRegion(
                 center: coordinate,
                 latitudinalMeters: reminder.radius * 5,
                 longitudinalMeters: reminder.radius * 5
@@ -488,7 +467,6 @@ struct ReminderDetailView: View {
         reminder.note         = editNote
         reminder.triggerEvent = editTriggerEvent
 
-        // Time rules
         if timeRuleEnabled {
             reminder.activeOnlyOn = onlyOnEnabled ? onlyOnDate : nil
             reminder.activeFrom   = (!onlyOnEnabled && fromEnabled)  ? fromDate  : nil
@@ -521,11 +499,11 @@ struct ReminderDetailView: View {
 
     // MARK: - Helpers
 
-    private func triggerEventLabel(_ event: TriggerEvent) -> String {
+    private func triggerEventKey(_ event: TriggerEvent) -> String.LocalizationValue {
         switch event {
-        case .onArrival:   return isGerman ? "Bei Ankunft"     : "On Arrival"
-        case .onDeparture: return isGerman ? "Beim Verlassen"  : "On Departure"
-        case .both:        return isGerman ? "Beides"          : "Both"
+        case .onArrival:   return "trigger_on_arrival"
+        case .onDeparture: return "trigger_on_departure"
+        case .both:        return "trigger_both"
         }
     }
 }
